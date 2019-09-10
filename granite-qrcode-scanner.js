@@ -29,6 +29,11 @@ class GraniteQrcodeScanner extends LitElement {
     this.frequency = 10;
   }
 
+  disconnectedCallback() {
+    this.active = false;
+    this.continuous = false;
+  }
+
   static get properties() {
     return {
       /**
@@ -176,7 +181,7 @@ class GraniteQrcodeScanner extends LitElement {
               image-width="480"
               image-height="480"
               @last-photo-changed="${this._onLastPhotoChanged}"
-              debug="${this.debug}"></granite-app-media-periodic-image-capture>
+              ?debug="${this.debug}"></granite-app-media-periodic-image-capture>
 
 
           <granite-qrcode-decoder
@@ -198,7 +203,7 @@ class GraniteQrcodeScanner extends LitElement {
     }
     this.devices=evt.detail.value;
 
-      console.log('device',navigator.mediaDevices.getSupportedConstraints());  
+    console.log('device',navigator.mediaDevices.getSupportedConstraints());  
   }
   _onSelectedDeviceChanged(evt) {
     if (this.debug) {
@@ -216,7 +221,6 @@ class GraniteQrcodeScanner extends LitElement {
     console.dir(imageCapture);
     imageCapture.takePhoto();
   }
-
 
   _onLastPhotoChanged(evt) {
     if (this.debug) {
