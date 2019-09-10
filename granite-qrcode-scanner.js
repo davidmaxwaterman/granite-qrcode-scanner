@@ -32,6 +32,7 @@ class GraniteQrcodeScanner extends LitElement {
   disconnectedCallback() {
     this.active = false;
     this.continuous = false;
+    super.disconnectedCallback();
   }
 
   static get properties() {
